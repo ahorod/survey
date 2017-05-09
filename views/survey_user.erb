@@ -2,9 +2,10 @@
   <a href="/">Home Page</a>
 
   <h1><%= @survey.name() %></h1>
+  <h5><a href="user/questions/<%= @survey.questions().first().id() %>">Take survey</a></h5>
 
 <!-- List all questions -->
-  <form action="/" method="post">
+  <!-- <form action="/" method="post">
     <% if @survey.questions.any?() %>
         <h4>Question: </h4>
         <h5><%= @survey.questions.first().description()%></h5>
@@ -22,5 +23,5 @@
     <div class="btn-group">
       <button class="btn btn-success" type="submit">Next Question</button>
     </div>
-  </form>
+  </form> -->
 </div>

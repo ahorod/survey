@@ -1,0 +1,23 @@
+<div class="container">
+  <a href="/">Home Page</a>
+
+  <h1><%= @survey.name() %></h1>
+
+<!-- List all questions -->
+  <form action="/next_question" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <input id="question_id" name="question_id" type="hidden" value="<%= @question.id() %>">
+    <h4>Question: </h4>
+    <h5><%= @question.description()%></h5>
+      <% @question.answers().each do |answer| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="answers_ids[]" value="<%= answer.id() %>"><%= answer.option()%>
+        </label>
+      </div>
+      <% end %>
+    <div class="btn-group">
+      <button class="btn btn-success" type="submit">Next Question</button>
+    </div>
+  </form>
+</div>
