@@ -6,6 +6,7 @@ require('./lib/question')
 require('./lib/answer')
 also_reload('lib/**/*.rb')
 require("pg")
+require('pry')
 
 
 get('/') do
@@ -105,14 +106,15 @@ patch('/next_question') do
 
   if prev_question.next() != nil
     @question = prev_question.next()
+    option_ids = params.fetch('answers_ids')
+
+    option_ids.each() do |option_id|
+      option = Answer.find(option_id)
+      option.update(:times_answered => option.times())
+    end
   erb(:survey_question)
+
   elsif prev_question.next() == nil
   erb(:end)
   end
-
-  # option_ids = params.fetch('answers_ids')
-  # option_ids.each() do |option_id|
-  #   option = Answer.find(option_id)
-  #   option.update(:times_answered => option.times())
-  # end
 end
