@@ -1,0 +1,26 @@
+<div class="container">
+  <a href="/">Home Page</a>
+
+  <h1><%= @survey.name() %></h1>
+
+<!-- List all questions -->
+  <form action="/" method="post">
+    <% if @survey.questions.any?() %>
+        <h4>Question: </h4>
+        <h5><%= @survey.questions.first().description()%></h5>
+          <% @survey.questions.first().answers().each do |answer| %>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="answers_ids[]" value="<%= answer.id() %>"><%= answer.option()%>
+            </label>
+          </div>
+          <% end %>
+
+    <% else %>
+        <h5>No questions added, please take other survey</h5>
+    <% end %>
+    <div class="btn-group">
+      <button class="btn btn-success" type="submit">Next Question</button>
+    </div>
+  </form>
+</div>

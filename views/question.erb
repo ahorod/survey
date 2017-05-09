@@ -1,0 +1,29 @@
+<div class="container">
+  <a href="/">Home Page</a>
+
+  <h1><%= @question.description() %></h1>
+
+<!-- List all options -->
+  <% if @question.answers().any?() %>
+      <h4>All Options: </h4>
+      <ul>
+      <% @question.answers().each() do |anwser| %>
+        <li><%= anwser.option() %></li>
+      <% end %>
+      </ul>
+
+  <% else %>
+      <h5>No answers added, please add answers</h5>
+  <% end %>
+
+<!-- Add options -->
+  <form action="/answers" method="post">
+    <div class="form-group">
+       <input id="question_id" name="question_id" type="hidden" value="<%= @question.id() %>">
+      <label for="option">Option: </label>
+      <input id="option" name="option" type="text"  class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Option</button>
+  </form>
+
+</div>

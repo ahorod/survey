@@ -1,0 +1,31 @@
+<div class="container">
+  <a href="/">Home Page</a>
+  <h5>Survey ID: <%= @survey.id()%></h5>
+  <h1><%= @survey.name() %></h1>
+
+  <a href="/surveys/<%= @survey.id() %>/edit" role="button" class="btn btn-danger">Edit Survey Info</a>
+
+<!-- List all questions -->
+  <% if @survey.questions().any?() %>
+      <h4>All questions: </h4>
+      <ul>
+      <% @survey.questions().each() do |question| %>
+        <li><a href="/questions/<%= question.id() %>"> <%= question.description() %></a></li>
+      <% end %>
+      </ul>
+
+  <% else %>
+      <h5>No questions added, please add question</h5>
+  <% end %>
+
+<!-- Add question -->
+  <form action="/questions" method="post">
+    <div class="form-group">
+       <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+      <label for="description">Description: </label>
+      <input id="description" name="description" type="text"  class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Question</button>
+  </form>
+
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+
+  <% if @surveys.any?() %>
+      <h4>All surveys: </h4>
+      <ul>
+      <% @surveys.each() do |survey| %>
+        <li><a href="/surveys/<%= survey.id() %>"> <%= survey.name() %></a></li>
+      <% end %>
+      </ul>
+
+  <% else %>
+      <h5>No surveys added yet!</h5>
+  <% end %>
+
+
+  <h2> Add Survey </h2>
+
+    <form action="/surveys" method="post">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input id="name" name="name" type="text"  class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
